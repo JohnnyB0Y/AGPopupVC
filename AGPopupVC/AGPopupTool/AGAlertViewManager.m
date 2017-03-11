@@ -13,6 +13,9 @@
 UIAlertViewDelegate
 >
 
+/** 并发线程队列 */
+@property (nonatomic, strong) dispatch_queue_t concurrentQueue;
+
 /** 缓存 */
 @property (nonatomic, strong) NSMutableDictionary<NSNumber *, AlertOperationBlock> *blockDictM;
 
@@ -28,7 +31,9 @@ UIAlertViewDelegate
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         alertViewManager = [[self alloc] init];
-        alertViewManager->_alertTag = 1000;
+        alertViewManager->_alertTag = 1024;
+        alertViewManager->_blockDictM = [NSMutableDictionary dictionaryWithCapacity:8];
+        alertViewManager->_concurrentQueue = dispatch_queue_create("com.AGPopupTool.AlertViewManagerQueue", DISPATCH_QUEUE_CONCURRENT);
     });
     return alertViewManager;
 }
@@ -73,7 +78,11 @@ UIAlertViewDelegate
           otherButtonTitles:buttonTitlesArray] show];
 }
 
-- (void)ag_showAlertViewWithTitle:(NSString *)title message:(NSString *)message operationBlocks:(AlertOperationBlock)operationBlocks cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION
+- (void)ag_showAlertViewWithTitle:(NSString *)title
+                          message:(NSString *)message
+                  operationBlocks:(AlertOperationBlock)operationBlocks
+                cancelButtonTitle:(NSString *)cancelButtonTitle
+                otherButtonTitles:(NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION
 {
     // 取出可变参数
     va_list args;
@@ -107,45 +116,42 @@ UIAlertViewDelegate
                  cancelButtonTitle:(NSString *)cancelButtonTitle
                  otherButtonTitles:(NSArray<NSString *> *)otherButtonTitles
 {
-    // 创建
-    UIAlertView *alertView = [[UIAlertView alloc] init];
-    alertView.title = title;
-    alertView.message = message;
-    alertView.delegate = self;
-    
-    // 添加按钮
-    if (cancelButtonTitle) {
-        [alertView addButtonWithTitle:cancelButtonTitle];
-    }
-    
-    for (NSString *otherBtnTitle in otherButtonTitles) {
-        [alertView addButtonWithTitle:otherBtnTitle];
-    }
-    
-    // 保存block
-    NSNumber *key = [self _newAlertTag];
-    alertView.tag = key.integerValue;
-    
-    if (operationBlocks) {
-        [self.blockDictM setObject:[operationBlocks copy] forKey:key];
-    }
-    
-    // 设置属性
-    if (setupBlock) {
-        setupBlock(alertView);
-    }
+    __block UIAlertView *alertView = nil;
+    dispatch_barrier_sync(self.concurrentQueue, ^{
+        
+        // 创建
+        alertView = [[UIAlertView alloc] init];
+        alertView.title = title;
+        alertView.message = message;
+        alertView.delegate = self;
+        
+        // 添加按钮
+        if (cancelButtonTitle) {
+            [alertView addButtonWithTitle:cancelButtonTitle];
+        }
+        
+        for (NSString *otherBtnTitle in otherButtonTitles) {
+            [alertView addButtonWithTitle:otherBtnTitle];
+        }
+        
+        // 保存block
+        NSNumber *key = [self _newAlertTag];
+        alertView.tag = key.integerValue;
+        
+        if (operationBlocks) {
+            [self.blockDictM setObject:[operationBlocks copy] forKey:key];
+        }
+        
+        // 设置属性
+        if (setupBlock) {
+            setupBlock(alertView);
+        }
+    });
     
     return alertView;
 }
 
 #pragma mark - ---------- Getter Methods ----------
-- (NSMutableDictionary<NSNumber *, AlertOperationBlock> *)blockDictM
-{
-    if (_blockDictM == nil) {
-        _blockDictM = [NSMutableDictionary dictionaryWithCapacity:8];
-    }
-    
-    return _blockDictM;
-}
+
 
 @end
