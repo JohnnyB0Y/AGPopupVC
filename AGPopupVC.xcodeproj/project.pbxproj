@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3A0E46601E6ED4300024598E /* AGPopupVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0E465C1E6ED4300024598E /* AGPopupVC.m */; };
-		3A0E46611E6ED4300024598E /* UIView+LayoutMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0E465F1E6ED4300024598E /* UIView+LayoutMethods.m */; };
-		3A0E46641E6ED47A0024598E /* AGAlertViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0E46631E6ED47A0024598E /* AGAlertViewManager.m */; };
 		3A3E69CE1E6EB68800EF48F1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3E69CD1E6EB68800EF48F1 /* main.m */; };
 		3A3E69D11E6EB68800EF48F1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3E69D01E6EB68800EF48F1 /* AppDelegate.m */; };
 		3A3E69D41E6EB68800EF48F1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3E69D31E6EB68800EF48F1 /* ViewController.m */; };
@@ -18,6 +15,9 @@
 		3A3E69DC1E6EB68800EF48F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A3E69DA1E6EB68800EF48F1 /* LaunchScreen.storyboard */; };
 		3A3E69E71E6EB68800EF48F1 /* AGPopupVCTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3E69E61E6EB68800EF48F1 /* AGPopupVCTests.m */; };
 		3A3E69F21E6EB68800EF48F1 /* AGPopupVCUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3E69F11E6EB68800EF48F1 /* AGPopupVCUITests.m */; };
+		3AC6950A1E8157EE0049D81B /* AGPopupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC695041E8157EE0049D81B /* AGPopupManager.m */; };
+		3AC6950B1E8157EE0049D81B /* AGPopupVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC695061E8157EE0049D81B /* AGPopupVC.m */; };
+		3AC6950C1E8157EE0049D81B /* UIView+LayoutMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC695091E8157EE0049D81B /* UIView+LayoutMethods.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,12 +38,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3A0E465B1E6ED4300024598E /* AGPopupVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGPopupVC.h; sourceTree = "<group>"; };
-		3A0E465C1E6ED4300024598E /* AGPopupVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGPopupVC.m; sourceTree = "<group>"; };
-		3A0E465E1E6ED4300024598E /* UIView+LayoutMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+LayoutMethods.h"; sourceTree = "<group>"; };
-		3A0E465F1E6ED4300024598E /* UIView+LayoutMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+LayoutMethods.m"; sourceTree = "<group>"; };
-		3A0E46621E6ED47A0024598E /* AGAlertViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGAlertViewManager.h; sourceTree = "<group>"; };
-		3A0E46631E6ED47A0024598E /* AGAlertViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGAlertViewManager.m; sourceTree = "<group>"; };
 		3A3E69C91E6EB68800EF48F1 /* AGPopupVC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AGPopupVC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A3E69CD1E6EB68800EF48F1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3A3E69CF1E6EB68800EF48F1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -60,6 +54,12 @@
 		3A3E69ED1E6EB68800EF48F1 /* AGPopupVCUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AGPopupVCUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A3E69F11E6EB68800EF48F1 /* AGPopupVCUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AGPopupVCUITests.m; sourceTree = "<group>"; };
 		3A3E69F31E6EB68800EF48F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3AC695031E8157EE0049D81B /* AGPopupManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGPopupManager.h; sourceTree = "<group>"; };
+		3AC695041E8157EE0049D81B /* AGPopupManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGPopupManager.m; sourceTree = "<group>"; };
+		3AC695051E8157EE0049D81B /* AGPopupVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGPopupVC.h; sourceTree = "<group>"; };
+		3AC695061E8157EE0049D81B /* AGPopupVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGPopupVC.m; sourceTree = "<group>"; };
+		3AC695081E8157EE0049D81B /* UIView+LayoutMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+LayoutMethods.h"; sourceTree = "<group>"; };
+		3AC695091E8157EE0049D81B /* UIView+LayoutMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+LayoutMethods.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,27 +87,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3A0E465A1E6ED4300024598E /* AGPopupTool */ = {
-			isa = PBXGroup;
-			children = (
-				3A0E46621E6ED47A0024598E /* AGAlertViewManager.h */,
-				3A0E46631E6ED47A0024598E /* AGAlertViewManager.m */,
-				3A0E465B1E6ED4300024598E /* AGPopupVC.h */,
-				3A0E465C1E6ED4300024598E /* AGPopupVC.m */,
-				3A0E465D1E6ED4300024598E /* category */,
-			);
-			path = AGPopupTool;
-			sourceTree = "<group>";
-		};
-		3A0E465D1E6ED4300024598E /* category */ = {
-			isa = PBXGroup;
-			children = (
-				3A0E465E1E6ED4300024598E /* UIView+LayoutMethods.h */,
-				3A0E465F1E6ED4300024598E /* UIView+LayoutMethods.m */,
-			);
-			path = category;
-			sourceTree = "<group>";
-		};
 		3A3E69C01E6EB68800EF48F1 = {
 			isa = PBXGroup;
 			children = (
@@ -131,7 +110,7 @@
 		3A3E69CB1E6EB68800EF48F1 /* AGPopupVC */ = {
 			isa = PBXGroup;
 			children = (
-				3A0E465A1E6ED4300024598E /* AGPopupTool */,
+				3AC695021E8157EE0049D81B /* PopupComponents */,
 				3A3E69CF1E6EB68800EF48F1 /* AppDelegate.h */,
 				3A3E69D01E6EB68800EF48F1 /* AppDelegate.m */,
 				3A3E69D21E6EB68800EF48F1 /* ViewController.h */,
@@ -169,6 +148,27 @@
 				3A3E69F31E6EB68800EF48F1 /* Info.plist */,
 			);
 			path = AGPopupVCUITests;
+			sourceTree = "<group>";
+		};
+		3AC695021E8157EE0049D81B /* PopupComponents */ = {
+			isa = PBXGroup;
+			children = (
+				3AC695031E8157EE0049D81B /* AGPopupManager.h */,
+				3AC695041E8157EE0049D81B /* AGPopupManager.m */,
+				3AC695051E8157EE0049D81B /* AGPopupVC.h */,
+				3AC695061E8157EE0049D81B /* AGPopupVC.m */,
+				3AC695071E8157EE0049D81B /* category */,
+			);
+			path = PopupComponents;
+			sourceTree = "<group>";
+		};
+		3AC695071E8157EE0049D81B /* category */ = {
+			isa = PBXGroup;
+			children = (
+				3AC695081E8157EE0049D81B /* UIView+LayoutMethods.h */,
+				3AC695091E8157EE0049D81B /* UIView+LayoutMethods.m */,
+			);
+			path = category;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -305,11 +305,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A3E69D41E6EB68800EF48F1 /* ViewController.m in Sources */,
-				3A0E46611E6ED4300024598E /* UIView+LayoutMethods.m in Sources */,
+				3AC6950B1E8157EE0049D81B /* AGPopupVC.m in Sources */,
 				3A3E69D11E6EB68800EF48F1 /* AppDelegate.m in Sources */,
-				3A0E46641E6ED47A0024598E /* AGAlertViewManager.m in Sources */,
+				3AC6950C1E8157EE0049D81B /* UIView+LayoutMethods.m in Sources */,
+				3AC6950A1E8157EE0049D81B /* AGPopupManager.m in Sources */,
 				3A3E69CE1E6EB68800EF48F1 /* main.m in Sources */,
-				3A0E46601E6ED4300024598E /* AGPopupVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
