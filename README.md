@@ -2,7 +2,7 @@
 
 ### 使用在 ViewController 有示例
 #### iOS 8 以前 UIAlertView Block 封装调用
-```
+```objective-c
 [[AGPopupManager sharedInstance] ag_showAlertView:^(UIAlertView *alertView) {
         // 设置 alertView
         alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
@@ -21,7 +21,7 @@
 ```
 
 #### iOS 8 或以上 UIAlertController Alert 或 ActionSheet Block 封装调用
-```
+```objective-c
 __weak typeof(self) weakSelf = self;
 UIAlertController *alertController 
 = [[AGPopupManager sharedInstance] ag_alertController:^(UIAlertController *alertC) {
@@ -55,7 +55,7 @@ operationBlocks:^(UIAlertController *alertC, NSInteger clickedIndex) {
 ```
 
 #### iOS 8 或以上 UIAlertController ActionSheet Block 封装调用
-```
+```objective-c
 
 __weak typeof(self) weakSelf = self;
 UIAlertController *alertController 
@@ -86,7 +86,7 @@ operationBlocks:^(UIAlertController *alertC, NSInteger clickedIndex) {
 
 
 #### 自定义弹出视图
-```
+```objective-c
 
 UIView *view = [UIView new];
 [view addSubview:[UISwitch new]];
