@@ -1,7 +1,7 @@
 # AGPopupVC 弹框控制器
 
-###使用在 ViewController 有示例
-######iOS 8 以前 UIAlertView Block 封装调用
+### 使用在 ViewController 有示例
+###### iOS 8 以前 UIAlertView Block 封装调用
 ```
 [[AGPopupManager sharedInstance] ag_showAlertView:^(UIAlertView *alertView) {
         // 设置 alertView
@@ -20,7 +20,7 @@
     } cancelButtonTitle:@"取消" otherButtonTitles:@"确认", @"呵呵", nil];
 ```
 
-######iOS 8 或以上 UIAlertController Alert 或 ActionSheet Block 封装调用
+###### iOS 8 或以上 UIAlertController Alert 或 ActionSheet Block 封装调用
 ```
 __weak typeof(self) weakSelf = self;
 UIAlertController *alertController 
@@ -54,7 +54,7 @@ operationBlocks:^(UIAlertController *alertC, NSInteger clickedIndex) {
     
 ```
 
-######iOS 8 或以上 UIAlertController ActionSheet Block 封装调用
+###### iOS 8 或以上 UIAlertController ActionSheet Block 封装调用
 ```
 
 __weak typeof(self) weakSelf = self;
@@ -85,7 +85,7 @@ operationBlocks:^(UIAlertController *alertC, NSInteger clickedIndex) {
 ```
 
 
-######自定义弹出视图
+###### 自定义弹出视图
 ```
 
 UIView *view = [UIView new];
