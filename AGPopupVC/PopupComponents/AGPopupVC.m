@@ -10,7 +10,6 @@
 #import "UIView+LayoutMethods.h"
 
 @interface AGPopupVC ()
-
 {
     /** 内容展示尺寸 默认 ( 屏幕宽，屏幕高的0.4 ) */
     CGSize _contentSize;
@@ -117,8 +116,45 @@
     [self _showView:view inRect:rect direction:direction defaultOrigin:NO];
 }
 
+/**
+ 自定义弹出视图
+ 
+ @param view 弹出的视图
+ @param customAnimation 自定义弹出视图 block
+ */
+- (void) ag_showView:(UIView *)view customOperation:(AGPopupCustomOperationBlock)operation
+{
+    if (self.isShowing) {
+        return;
+    }
+    
+    // 1.0 添加到父视图
+    [self.window        addSubview:self.view];
+    [self.view          addSubview:view];
+    self.contentView    = view;
+    
+    // 2.0 背景视图显示
+    self.view.hidden        = NO;
+    self.contentView.hidden = NO;
+    _showing = YES;
+    
+    [UIView animateWithDuration:_showDuration animations:^{
+        // 背景色
+        self.view.backgroundColor = [self coverColor];
+    }];
+    
+    // 操作 block
+    operation ? operation(self.view) : nil;
+    
+}
+
 #pragma mark 隐藏
 - (void) ag_hide
+{
+    [self ag_hideWithDuration:_hideDuration direction:_alertDirection];
+}
+
+- (void) ag_hideWithDuration:(CGFloat)duration direction:(AGPopupDirection)direction
 {
     if (self.isShowing == NO) {
         return;
@@ -127,9 +163,9 @@
     // 1.0 动画
     self.view.backgroundColor = [UIColor clearColor];
     
-    [UIView animateWithDuration:_hideDuration animations:^{
+    [UIView animateWithDuration:duration animations:^{
         
-        switch (_alertDirection) {
+        switch (direction) {
             case AGPopupDirectionBottom: {
                 self.contentView.y = self.view.height;
             } break;
@@ -163,7 +199,6 @@
     
     _showing = NO;
 }
-
 
 #pragma mark - --------- Private Methods --------------
 - (void) _showView:(UIView *)view inRect:(CGRect)rect direction:(AGPopupDirection)direction defaultOrigin:(BOOL)yesOrNo

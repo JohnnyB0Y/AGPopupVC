@@ -18,9 +18,6 @@
 UIAlertViewDelegate
 >
 
-/** 并发线程队列 */
-@property (nonatomic, strong) dispatch_queue_t concurrentQueue;
-
 /** 缓存 */
 @property (nonatomic, strong) NSMutableDictionary<NSNumber *, id> *blockDictM;
 
@@ -38,7 +35,6 @@ UIAlertViewDelegate
         popupManager = [[self alloc] init];
         popupManager->_alertTag = 1024;
         popupManager->_blockDictM = [NSMutableDictionary dictionaryWithCapacity:8];
-        popupManager->_concurrentQueue = dispatch_queue_create("com.JohnnyB0Y.AGPopupManagerQueue", DISPATCH_QUEUE_CONCURRENT);
     });
     return popupManager;
 }
@@ -161,40 +157,36 @@ UIAlertViewDelegate
                          alertActionTitles:(NSArray<NSDictionary *> *)alertActionTitles
                            operationBlocks:(AlertCOperationBlock)operationBlocks
 {
+    // 创建
+    __AGAlertController *alertC =
+    [__AGAlertController alertControllerWithTitle:title
+                                          message:message
+                                   preferredStyle:preferredStyle];
     
-    __block __AGAlertController *alertC = nil;
+    // 设置属性
+    if (setupBlock) {
+        setupBlock(alertC);
+    }
     
-    dispatch_barrier_sync(self.concurrentQueue, ^{
-        // 创建
-        alertC = [__AGAlertController alertControllerWithTitle:title
-                                                       message:message
-                                                preferredStyle:preferredStyle];
+    // 添加按钮
+    for ( NSInteger i = 0; i < alertActionTitles.count; i++ ) {
+        NSDictionary *alertActionDict = [alertActionTitles objectAtIndex:i];
         
-        // 设置属性
-        if (setupBlock) {
-            setupBlock(alertC);
-        }
-        
-        // 添加按钮
-        for ( NSInteger i = 0; i < alertActionTitles.count; i++ ) {
-            NSDictionary *alertActionDict = [alertActionTitles objectAtIndex:i];
-            
-            [alertC addAction:[self _alertActionWithAlertC:alertC AlertActionDict:alertActionDict atIndex:i+1]];
-        }
-        
-        // 添加取消按钮
-        if ( cancelTitle ) {
-            [alertC addAction:[self _alertActionWithAlertC:alertC AlertActionDict:[AGPopupManager alertActionStyleCancel:cancelTitle] atIndex:0]];
-        }
-        
-        // 保存block
-        NSNumber *key = [self _newAlertTag];
-        alertC.alertTag = key;
-        
-        if (operationBlocks) {
-            [self.blockDictM setObject:[operationBlocks copy] forKey:key];
-        }
-    });
+        [alertC addAction:[self _alertActionWithAlertC:alertC AlertActionDict:alertActionDict atIndex:i+1]];
+    }
+    
+    // 添加取消按钮
+    if ( cancelTitle ) {
+        [alertC addAction:[self _alertActionWithAlertC:alertC AlertActionDict:[AGPopupManager alertActionStyleCancel:cancelTitle] atIndex:0]];
+    }
+    
+    // 保存block
+    NSNumber *key = [self _newAlertTag];
+    alertC.alertTag = key;
+    
+    if (operationBlocks) {
+        [self.blockDictM setObject:[operationBlocks copy] forKey:key];
+    }
     
     return alertC;
 }

@@ -17,6 +17,9 @@ typedef NS_ENUM(NSUInteger, AGPopupDirection) {
     AGPopupDirectionCenter,     // 中间出现
 };
 
+typedef void(^AGPopupCustomOperationBlock)(UIView *superview);
+
+
 @interface AGPopupVC : UIViewController
 
 /** 出现动画时间 默认 0.35s */
@@ -83,7 +86,17 @@ typedef NS_ENUM(NSUInteger, AGPopupDirection) {
 
 - (void) ag_showView:(UIView *)view inRect:(CGRect)rect direction:(AGPopupDirection)direction;
 
+/**
+ 自定义弹出视图
+ 
+ @param view 弹出的视图
+ @param operation 自定义弹出视图 block (无循环引用)
+ */
+- (void) ag_showView:(UIView *)view customOperation:(AGPopupCustomOperationBlock)operation;
+
+
 /** 隐藏视图 */
 - (void) ag_hide;
+- (void) ag_hideWithDuration:(CGFloat)duration direction:(AGPopupDirection)direction;
 
 @end
